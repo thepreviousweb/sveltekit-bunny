@@ -26,11 +26,15 @@ jobs:
       - name: Build SvelteKit for Bunny
         run: npm run build
 
+      - name: Show client build output
+        run: find .svelte-kit/bunny.net/client -type f | sort
+
       - name: Upload client assets to Bunny Storage
         env:
-          BUNNY_ASSETS_PREFIX: ${{ vars.BUNNY_ASSETS_PREFIX }}
-          BUNNY_ASSETS_REGION: ${{ vars.BUNNY_ASSETS_REGION }}
-          BUNNY_ASSETS_ZONE: ${{ vars.BUNNY_ASSETS_ZONE }}
+          # Use repository Secrets for all of these (Settings → Secrets → Actions)
+          BUNNY_ASSETS_PREFIX: ${{ secrets.BUNNY_ASSETS_PREFIX }}
+          BUNNY_ASSETS_REGION: ${{ secrets.BUNNY_ASSETS_REGION }}
+          BUNNY_ASSETS_ZONE: ${{ secrets.BUNNY_ASSETS_ZONE }}
           BUNNY_ASSETS_UPLOAD_KEY: ${{ secrets.BUNNY_ASSETS_UPLOAD_KEY }}
         run: node scripts/upload-assets.mjs
 
