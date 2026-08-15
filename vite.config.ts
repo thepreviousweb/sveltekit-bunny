@@ -1,4 +1,4 @@
-import adapter from 'sveltekit-adapter-bunny';
+import adapter from './adapters/bunny/index.js';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
