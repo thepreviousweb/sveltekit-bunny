@@ -1,4 +1,4 @@
-# SvelteKit Bunny Demo.
+# SvelteKit Bunny Demo
 
 Minimale SvelteKit app (Home / About / Contact) met [`sveltekit-adapter-bunny`](https://github.com/planza-digital/sveltekit-adapter-bunny) om Bunny.net Edge Scripting uit te proberen.
 
