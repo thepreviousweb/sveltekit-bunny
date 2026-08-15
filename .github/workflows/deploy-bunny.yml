@@ -8,7 +8,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    name: Build and upload script
+    name: Build and deploy
 
     steps:
       - name: Checkout repository
@@ -25,6 +25,14 @@ jobs:
 
       - name: Build SvelteKit for Bunny
         run: npm run build
+
+      - name: Upload client assets to Bunny Storage
+        env:
+          BUNNY_ASSETS_PREFIX: ${{ vars.BUNNY_ASSETS_PREFIX }}
+          BUNNY_ASSETS_REGION: ${{ vars.BUNNY_ASSETS_REGION }}
+          BUNNY_ASSETS_ZONE: ${{ vars.BUNNY_ASSETS_ZONE }}
+          BUNNY_ASSETS_UPLOAD_KEY: ${{ secrets.BUNNY_ASSETS_UPLOAD_KEY }}
+        run: node scripts/upload-assets.mjs
 
       - name: Deploy Script to Bunny Edge Scripting
         uses: BunnyWay/actions/deploy-script@main
